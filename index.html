@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>INTERprise Technologies — Agentic architecture &amp; automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F9;
+  --ink:#10141B;
+  --slate:#5A6472;
+  --rule:#D8DCE3;
+  --signal:#EC1C24;
+  --live:#128A5E;
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Public Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:2px}
+
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--slate)}
+
+/* ---------- top bar ---------- */
+.topbar{border-bottom:1px solid var(--rule);position:sticky;top:0;background:rgba(246,247,249,.92);backdrop-filter:blur(8px);z-index:20}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;gap:24px}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.brand b{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.02em}
+.brand b i{font-style:normal;font-weight:500;color:var(--slate)}
+.brand span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);border-left:1px solid var(--rule);padding-left:10px}
+nav{display:flex;gap:26px}
+nav a{font-size:14.5px;text-decoration:none;color:var(--slate);padding:4px 0;border-bottom:1px solid transparent}
+nav a:hover{color:var(--ink);border-bottom-color:var(--signal)}
+
+/* ---------- hero ---------- */
+.hero{padding:96px 0 0}
+.trace{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.trace .dot{width:7px;height:7px;border-radius:50%;background:var(--live);flex:none;animation:beat 2.6s ease-in-out infinite}
+@keyframes beat{0%,100%{opacity:1}50%{opacity:.28}}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(40px,6.6vw,80px);line-height:1.02;letter-spacing:-.035em;max-width:18ch}
+h1 em{font-style:normal;color:var(--slate)}
+.lede{margin-top:30px;max-width:56ch;font-size:19.5px;color:var(--slate)}
+.lede strong{color:var(--ink);font-weight:500}
+
+/* ---------- signature rail ---------- */
+.rail{margin:66px 0 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:26px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.node{padding:0 22px;border-left:1px solid var(--rule);position:relative}
+.node:first-child{border-left:0;padding-left:0}
+.node .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal)}
+.node .t{font-family:var(--display);font-weight:500;font-size:17px;margin-top:7px;letter-spacing:-.01em}
+.node .d{font-size:14px;color:var(--slate);margin-top:3px}
+.node::after{content:"";position:absolute;right:-4px;top:50%;width:7px;height:7px;border-radius:50%;background:var(--rule)}
+.node:last-child::after{display:none}
+
+/* ---------- sections ---------- */
+section{padding:104px 0}
+.shead{display:flex;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:52px;border-bottom:1px solid var(--rule);padding-bottom:18px}
+.shead .eyebrow{margin-left:auto}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.4vw,36px);letter-spacing:-.028em}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.col{padding:0 30px;border-left:1px solid var(--rule)}
+.col:first-child{border-left:0;padding-left:0}
+.col h3{font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:-.02em;margin:12px 0 12px}
+.col p{font-size:15.5px;color:var(--slate)}
+.col ul{list-style:none;margin-top:18px;font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+.col li{padding:7px 0;border-top:1px solid var(--rule)}
+
+/* ---------- inverted architecture ---------- */
+.dark{background:var(--ink);color:var(--paper)}
+.dark .shead{border-bottom-color:#2A313D}
+.dark .eyebrow{color:#8A94A3}
+.layers{display:flex;flex-direction:column;gap:1px;background:#2A313D;border:1px solid #2A313D}
+.layer{background:var(--ink);display:grid;grid-template-columns:170px 1fr auto;gap:26px;align-items:center;padding:22px 26px}
+.layer .lk{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#8A94A3}
+.layer .lt{font-family:var(--display);font-weight:500;font-size:17.5px}
+.layer .lt small{display:block;font-family:var(--body);font-weight:400;font-size:14.5px;color:#8A94A3;margin-top:3px}
+.layer .lp{font-family:var(--mono);font-size:11.5px;color:var(--signal);white-space:nowrap}
+.dark .note{margin-top:26px;font-size:14.5px;color:#8A94A3;max-width:62ch}
+
+/* ---------- hardware band ---------- */
+.band{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:78px 0}
+.band .claim{font-family:var(--display);font-weight:600;font-size:clamp(46px,8vw,92px);line-height:1;letter-spacing:-.045em}
+.band .claim em{font-style:normal;color:var(--signal)}
+.band .sub{margin-top:26px;max-width:52ch;font-size:19px;color:var(--slate)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:52px;border-top:1px solid var(--rule)}
+.fact{padding:24px 26px 0;border-left:1px solid var(--rule)}
+.fact:first-child{border-left:0;padding-left:0}
+.fact .fk{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal)}
+.fact .fv{font-family:var(--display);font-weight:500;font-size:19px;letter-spacing:-.02em;margin-top:9px}
+.fact .fd{font-size:14.5px;color:var(--slate);margin-top:7px}
+
+/* ---------- product shots ---------- */
+.shots{display:flex;flex-direction:column;gap:78px}
+.shot{display:grid;grid-template-columns:290px 1fr;gap:44px;align-items:start}
+.shot .cap h3{font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:-.02em;margin:12px 0 10px}
+.shot .cap p{font-size:15px;color:var(--slate)}
+.shot .cap .who{margin-top:16px;padding-top:14px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--signal)}
+.frame{border:1px solid var(--rule);background:#fff;overflow:hidden}
+.chrome{display:flex;align-items:center;gap:9px;padding:9px 13px;background:#EDEFF3;border-bottom:1px solid var(--rule)}
+.chrome i{width:8px;height:8px;border-radius:50%;background:#CBD1DA;display:block}
+.chrome .url{flex:1;margin-left:8px;background:#fff;border:1px solid var(--rule);border-radius:3px;padding:4px 9px;font-family:var(--mono);font-size:10.5px;color:var(--slate)}
+.app{padding:18px 20px 22px;--kx:#0E5A52}
+.appbar{display:flex;align-items:center;justify-content:space-between;padding-bottom:13px;border-bottom:1px solid var(--rule)}
+.klogo{display:flex;align-items:center;gap:8px}
+.klogo b{width:20px;height:20px;background:var(--kx);color:#fff;font-family:var(--display);font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center}
+.klogo span{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:-.01em}
+.chip{display:flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:20px;padding:3px 10px;font-family:var(--mono);font-size:10px;color:var(--slate)}
+.chip em{width:5px;height:5px;border-radius:50%;background:var(--kx);font-style:normal}
+.chip s{text-decoration:none;font-size:8px;color:#9aa1ad}
+.apptitle{display:flex;align-items:center;justify-content:space-between;margin:20px 0 18px}
+.apptitle h4{font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:.22em;word-spacing:.6em;color:#1b1f27}
+.pill{display:flex;align-items:center;gap:8px;border:1px solid var(--rule);border-radius:20px;padding:5px 12px;font-family:var(--body);font-weight:500;font-size:9.5px;letter-spacing:.14em;word-spacing:.34em;text-transform:uppercase;color:#15803d}
+.pill i{width:7px;height:7px;border-radius:50%;background:#16a34a;display:block}
+.grp{display:flex;align-items:center;gap:10px;margin:19px 0 11px}
+.grp b{width:5px;height:18px;border-radius:3px;background:var(--kx);display:block;flex:none}
+.grp span{font-family:var(--body);font-weight:600;font-size:14px;color:#1b1f27}
+.grp hr{flex:1;border:0;border-top:1px solid var(--rule);margin:0}
+.grp .cv{font-size:9px;color:#9aa1ad}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tile{border:1px solid #d7d9ec;border-radius:10px;padding:11px;min-height:58px;display:flex;gap:9px;align-items:flex-start}
+.tile>div{min-width:0}
+.tile .ic{width:26px;height:26px;border-radius:7px;background:var(--kx);flex:none;position:relative}
+.tile .ic::after{content:"";position:absolute;right:4px;bottom:4px;width:6px;height:6px;border-radius:50%;background:var(--signal)}
+.tile .tt{font-family:var(--body);font-weight:600;font-size:11.5px;color:#1b1f27}
+.tile .ts{font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;text-transform:uppercase;color:#7b828d;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tile .ts.desc{font-family:var(--body);font-size:10px;letter-spacing:0;text-transform:none}
+.tile.off{opacity:.45}
+.tile.off .tt::after{content:" *";color:var(--signal)}
+.tile.lan .ts::before{content:"lan · ";color:var(--kx)}
+.msg{display:flex;gap:10px;margin-top:14px}
+.msg .av{width:22px;height:22px;flex:none;border-radius:50%;background:#EDEFF3;font-family:var(--mono);font-size:9px;display:flex;align-items:center;justify-content:center;color:var(--slate)}
+.msg.ai .av{background:var(--kx);color:#fff}
+.msg .bod{font-size:12.5px;line-height:1.6}
+.msg .bod b{font-weight:500}
+.msg .bod .src{margin-top:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--slate);border-top:1px solid var(--rule);padding-top:7px}
+.ask{margin-top:16px;border:1px solid var(--rule);border-radius:6px;padding:9px 11px;font-size:12px;color:#A7AEB9;display:flex;justify-content:space-between}
+.disc{margin-top:44px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);border-top:1px solid var(--rule);padding-top:16px}
+
+.rows{border-top:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:64px 1fr 1.15fr;gap:30px;padding:26px 0;border-bottom:1px solid var(--rule);align-items:start}
+.row .n{font-family:var(--mono);font-size:12px;color:var(--signal);padding-top:4px}
+.row h4{font-family:var(--display);font-weight:600;font-size:18.5px;letter-spacing:-.015em}
+.row p{font-size:15.5px;color:var(--slate)}
+
+/* ---------- qualification ---------- */
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.fitcol{padding:0 34px;border-left:1px solid var(--rule)}
+.fitcol:first-child{border-left:0;padding-left:0}
+.fitcol h3{font-family:var(--display);font-weight:600;font-size:21px;letter-spacing:-.02em;margin:12px 0 4px}
+.fitcol ul{list-style:none;margin-top:14px}
+.fitcol li{display:grid;grid-template-columns:18px 1fr;gap:13px;padding:15px 0;border-top:1px solid var(--rule);font-size:15.5px;color:var(--slate)}
+.fitcol li .m{font-family:var(--mono);font-size:13px;line-height:1.55}
+.fitcol.yes li .m{color:#128A5E}
+.fitcol.no li .m{color:var(--signal)}
+
+/* ---------- deliverable artefacts ---------- */
+.arts{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.arts span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--rule);border-radius:3px;padding:5px 9px;color:var(--ink)}
+
+/* ---------- proof ---------- */
+.proof{background:#fff;border:1px solid var(--rule);padding:44px 46px}
+.proof blockquote{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.5vw,27px);line-height:1.32;letter-spacing:-.02em;max-width:34ch}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-top:38px;border-top:1px solid var(--rule);padding-top:26px}
+.stat .v{font-family:var(--display);font-weight:600;font-size:30px;letter-spacing:-.03em}
+.stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-top:5px}
+
+/* ---------- contact ---------- */
+.cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:500;font-size:16px;padding:15px 26px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);transition:background .16s,color .16s}
+.btn:hover{background:var(--signal);border-color:var(--signal)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+footer{border-top:1px solid var(--rule);padding:38px 0 60px;font-size:13.5px;color:var(--slate)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+footer .mono{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+
+@media (max-width:900px){
+  .rail,.cols,.stats{grid-template-columns:1fr 1fr}
+  .node,.col{border-left:0;padding:18px 0;border-top:1px solid var(--rule)}
+  .node::after{display:none}
+  .layer{grid-template-columns:1fr;gap:8px}
+  .row{grid-template-columns:40px 1fr;gap:16px}
+  .row p{grid-column:2}
+  .row>div:last-child{grid-column:2}
+  .shot{grid-template-columns:1fr;gap:22px}
+  .facts{grid-template-columns:1fr}
+  .fit{grid-template-columns:1fr}
+  .fitcol{border-left:0;padding:26px 0 0}
+  .fact{border-left:0;padding:22px 0 0;border-top:1px solid var(--rule)}
+  .fact:first-child{border-top:0}
+  .tiles{grid-template-columns:1fr 1fr}
+  nav{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top"><b>INTER<i>prise</i></b><span>AI</span></a>
+    <nav>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#platform">Platform</a>
+      <a href="#approach">Approach</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="wrap hero">
+  <div class="trace">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="eyebrow">Private agentic architecture &nbsp;·&nbsp; Deployed inside your network &nbsp;·&nbsp; Sydney, Australia</span>
+  </div>
+
+  <h1>We install AI <em>inside</em> your business.</h1>
+
+  <p class="lede">Private agents that run on your own hardware, answer from your own data, and cost nothing <strong>per question, per seat, or per user</strong>.</p>
+
+  <div class="rail">
+    <div class="node"><div class="k">Layer 01</div><div class="t">Identity</div><div class="d">Who is allowed in, and how</div></div>
+    <div class="node"><div class="k">Layer 02</div><div class="t">Gateway</div><div class="d">Which model, at what cost</div></div>
+    <div class="node"><div class="k">Layer 03</div><div class="t">Agents</div><div class="d">Work that actually completes</div></div>
+    <div class="node"><div class="k">Layer 04</div><div class="t">Evidence</div><div class="d">Traces, logs, uptime, audit</div></div>
+  </div>
+</div>
+
+<section id="capabilities" class="wrap">
+  <div class="shead"><h2>What we build</h2><span class="eyebrow">Three practices</span></div>
+  <div class="cols">
+    <div class="col">
+      <span class="eyebrow">Practice 01</span>
+      <h3>Agentic architectures</h3>
+      <p>Retrieval and reasoning systems wired into the databases, ERPs and schedulers a business already runs on — with failure modes designed in, not discovered later.</p>
+      <ul><li>RAG over live operational data</li><li>Failure-aware response design</li><li>Human-in-the-loop approval paths</li></ul>
+    </div>
+    <div class="col">
+      <span class="eyebrow">Practice 02</span>
+      <h3>Automation &amp; orchestration</h3>
+      <p>Workflow automation that carries production discipline: versioned, monitored, alerting on its own failures, and reviewable line by line before it ever touches your data.</p>
+      <ul><li>Workflow and API orchestration</li><li>Scheduled and event-driven pipelines</li><li>Operator alerting and escalation</li></ul>
+    </div>
+    <div class="col">
+      <span class="eyebrow">Practice 03</span>
+      <h3>Sovereign &amp; private AI</h3>
+      <p>For regulated and defence-supply-chain work: models that run on your own hardware, on your own network, where no prompt leaves the building.</p>
+      <ul><li>On-premises models, no GPU required</li><li>Active Directory and LDAP integration</li><li>Essential Eight ML2 alignment</li><li>Data-residency by architecture</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="architecture" class="dark">
+  <div class="wrap">
+    <div class="shead"><h2>The reference architecture</h2><span class="eyebrow">Full stack &nbsp;·&nbsp; Observability at every layer</span></div>
+    <div class="layers">
+      <div class="layer"><div class="lk">Edge</div><div class="lt">Reverse proxy &amp; TLS<small>One front door, managed certificates, split DNS</small></div><div class="lp">single ingress</div></div>
+      <div class="layer"><div class="lk">Identity</div><div class="lt">Directory federation &amp; brokered SSO<small>Active Directory and LDAP integration, partner tenants, conditional MFA</small></div><div class="lp">least privilege</div></div>
+      <div class="layer"><div class="lk">Gateway</div><div class="lt">Model routing &amp; budget control<small>Scoped keys, per-application aliases, spend ceilings</small></div><div class="lp">cost ceiling</div></div>
+      <div class="layer"><div class="lk">Reasoning</div><div class="lt">Agents, retrieval &amp; workflow<small>Vector store, orchestration, conversational surfaces</small></div><div class="lp">no data egress</div></div>
+      <div class="layer"><div class="lk">Evidence</div><div class="lt">Tracing, metrics &amp; security telemetry<small>Every prompt traced, every service watched, every event retained</small></div><div class="lp">full audit trail</div></div>
+    </div>
+    <p class="note">We deliver the whole stack, not a layer of it — and every layer reports on itself, so the platform can be proven to be working rather than assumed to be. We do not publish the bill of materials. Components are selected per client against their regulatory and network constraints, and disclosed under engagement; naming the internals of a client's platform on a public page is reconnaissance we are not willing to hand out.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="eyebrow">The hardware question</span>
+    <p class="claim" style="margin-top:20px"><em>No GPU.</em></p>
+    <p class="sub">For everyday operational tasks, a locally hosted model does the work most people currently send to a public AI service — with the difference that nothing leaves your network.</p>
+    <div class="facts">
+      <div class="fact">
+        <div class="fk">Footprint</div>
+        <div class="fv">A server VM you already own</div>
+        <div class="fd">Ordinary CPU and memory on existing virtualisation. No accelerator purchase, no new rack, no data-centre conversation.</div>
+      </div>
+      <div class="fact">
+        <div class="fk">Escalation</div>
+        <div class="fv">Add a GPU only when the work earns it</div>
+        <div class="fd">Larger models and heavier workloads get hardware when there is a measured reason. The architecture does not change when they do.</div>
+      </div>
+      <div class="fact">
+        <div class="fk">Routing</div>
+        <div class="fv">Local by default, cloud by exception</div>
+        <div class="fd">Sensitive work stays on the local model. A task that genuinely needs a frontier model is routed deliberately, logged, and costed.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="platform" class="wrap">
+  <div class="shead"><h2>Inside the platform</h2><span class="eyebrow">Three surfaces, one stack</span></div>
+  <div class="shots">
+
+    <div class="shot">
+      <div class="cap">
+        <span class="eyebrow">Surface 01</span>
+        <h3>The staff portal</h3>
+        <p>One address for everything AI in the business. Tiles a person is not entitled to stay visible but inert, so staff can see what exists and request access — rather than discover a wall.</p>
+        <div class="who">Built for the business sponsor</div>
+      </div>
+      <div class="frame">
+        <div class="chrome"><i></i><i></i><i></i><span class="url">https://ai.kestrelindustries.com.au</span></div>
+        <div class="app">
+          <div class="appbar">
+            <div class="klogo"><b>K</b><span>Kestrel Industries</span></div>
+            <div class="chip"><em></em>j.harding<s>▾</s></div>
+          </div>
+          <div class="apptitle"><h4>AI PLATFORM</h4><div class="pill"><i></i>Platform is healthy</div></div>
+          <div class="grp"><b></b><span>Assistants</span><hr><span class="cv">▾</span></div>
+          <div class="tiles">
+            <div class="tile"><span class="ic"></span><div><div class="tt">Ask Kestrel</div><div class="ts desc">General assistant</div></div></div>
+            <div class="tile"><span class="ic"></span><div><div class="tt">Scheduling agent</div><div class="ts desc">Production planning</div></div></div>
+            <div class="tile"><span class="ic"></span><div><div class="tt">Document search</div><div class="ts desc">Policies and drawings</div></div></div>
+            <div class="tile off"><span class="ic"></span><div><div class="tt">Quality analyst</div><div class="ts desc">Non-conformance review</div></div></div>
+          </div>
+          <div class="grp"><b></b><span>Workspace</span><hr><span class="cv">▾</span></div>
+          <div class="tiles">
+            <div class="tile"><span class="ic"></span><div><div class="tt">Knowledge base</div><div class="ts desc">Company documentation</div></div></div>
+            <div class="tile"><span class="ic"></span><div><div class="tt">Manage sign-in</div><div class="ts desc">Profile &amp; 2FA</div></div></div>
+            <div class="tile off"><span class="ic"></span><div><div class="tt">Data curator</div><div class="ts desc">Training samples</div></div></div>
+            <div class="tile off"><span class="ic"></span><div><div class="tt">Operations</div><div class="ts desc">Platform administration</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="cap">
+        <span class="eyebrow">Surface 02</span>
+        <h3>The operations launchpad</h3>
+        <p>Every console behind the platform in one gated page, with a live health indicator polling the status plane. Delivery is the easy part — this is the surface that proves the thing is being run.</p>
+        <div class="who">Built for the IT manager</div>
+      </div>
+      <div class="frame">
+        <div class="chrome"><i></i><i></i><i></i><span class="url">https://admin.kestrelindustries.com.au</span></div>
+        <div class="app">
+          <div class="appbar">
+            <div class="klogo"><b>K</b><span>Kestrel Industries</span></div>
+            <div class="chip"><em></em>platform-admin<s>▾</s></div>
+          </div>
+          <div class="apptitle"><h4>ADMIN LAUNCHPAD</h4><div class="pill"><i></i>All services up</div></div>
+          <div class="grp"><b></b><span>Identity &amp; access</span><hr><span class="cv">▾</span></div>
+          <div class="tiles">
+            <div class="tile"><div><div class="tt">Directory federation</div><div class="ts">login.kestrelindustries.com.au</div></div></div>
+            <div class="tile"><div><div class="tt">Access policy</div><div class="ts">auth.kestrelindustries.com.au</div></div></div>
+            <div class="tile"><div><div class="tt">Session audit</div><div class="ts">audit.kestrelindustries.com.au</div></div></div>
+            <div class="tile lan"><div><div class="tt">Perimeter</div><div class="ts">10.40.0.254:8080</div></div></div>
+          </div>
+          <div class="grp"><b></b><span>Observability</span><hr><span class="cv">▾</span></div>
+          <div class="tiles">
+            <div class="tile"><div><div class="tt">Dashboards</div><div class="ts">metrics.kestrelindustries.com.au</div></div></div>
+            <div class="tile"><div><div class="tt">Prompt tracing</div><div class="ts">trace.kestrelindustries.com.au</div></div></div>
+            <div class="tile"><div><div class="tt">Uptime</div><div class="ts">status.kestrelindustries.com.au</div></div></div>
+            <div class="tile lan"><div><div class="tt">Security events</div><div class="ts">10.40.0.22:9090</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shot">
+      <div class="cap">
+        <span class="eyebrow">Surface 03</span>
+        <h3>The agent at work</h3>
+        <p>An answer grounded in the company's own operational data, with the source named and the limits of the answer stated. When it cannot know something, it says so instead of inventing it.</p>
+        <div class="who">Built for the person doing the job</div>
+      </div>
+      <div class="frame">
+        <div class="chrome"><i></i><i></i><i></i><span class="url">https://plan.kestrelindustries.com.au</span></div>
+        <div class="app">
+          <div class="appbar">
+            <div class="klogo"><b>K</b><span>Scheduling agent</span></div>
+            <div class="chip"><em></em>j.harding<s>▾</s></div>
+          </div>
+          <div class="msg">
+            <div class="av">JH</div>
+            <div class="bod">Which orders on line 3 are at risk of missing their promised date this week?</div>
+          </div>
+          <div class="msg ai">
+            <div class="av">K</div>
+            <div class="bod">
+              Four orders on line 3 are currently forecast past their promised date.<br><br>
+              <b>SO-48117</b> is the most exposed — it is queued behind a changeover and has no float left. <b>SO-48122</b> and <b>SO-48130</b> lose their buffer only if the changeover runs over its standard time. <b>SO-48145</b> is at risk from a material receipt that has not been booked in.<br><br>
+              I can see the schedule and the order book, but not the inbound delivery status — the receipt date for SO-48145 needs confirming with purchasing before you treat this as final.
+              <div class="src">Source · production schedule, order book · read 14 minutes ago</div>
+            </div>
+          </div>
+          <div class="ask"><span>Ask a follow-up question</span><span>↵</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="disc">Representative interfaces · fictional company, fictional data · no client system depicted</p>
+</section>
+
+<section id="approach" class="wrap">
+  <div class="shead"><h2>How we work</h2><span class="eyebrow">Four commitments</span></div>
+  <div class="rows">
+    <div class="row"><div class="n">01</div><div><h4>Architecture before tooling</h4></div><p>TOGAF-grounded design. We establish the target state and the constraints — regulatory, network, budget — before a single product is chosen.</p></div>
+    <div class="row"><div class="n">02</div><div><h4>Production discipline from day one</h4></div><p>Backups before edits, controlled restarts, a stated rollback path for every change. There is no "it's only the pilot" phase.</p></div>
+    <div class="row"><div class="n">03</div><div><h4>You get the documentation, not a dependency</h4></div><div><p>Every engagement ends with a set of documents your own team can work from. Lock-in is a business model, not an outcome.</p><div class="arts"><span>Architecture design</span><span>As-built record</span><span>Deployment runbook</span><span>Operating procedures</span><span>Recovery &amp; rollback plan</span><span>Access &amp; group model</span></div></div></div>
+    <div class="row"><div class="n">04</div><div><h4>Compliance is designed in</h4></div><p>Defence Industry Security Program and Essential Eight Maturity Level 2 obligations shape the architecture from the first diagram, not the final audit.</p></div>
+  </div>
+</section>
+
+<section id="fit" class="wrap">
+  <div class="shead"><h2>Who this is for</h2><span class="eyebrow">And who it is not</span></div>
+  <div class="fit">
+    <div class="fitcol yes">
+      <span class="eyebrow">A good fit</span>
+      <h3>This is for you if</h3>
+      <ul>
+        <li><span class="m">✓</span><span>Your industry, your insurer or your customers impose obligations on where data lives and who can reach it.</span></li>
+        <li><span class="m">✓</span><span>You already run your own servers, or you are willing to, and you would rather own the thing than rent it per seat.</span></li>
+        <li><span class="m">✓</span><span>Your team is doing work by hand that a system should be doing, and you can name it.</span></li>
+        <li><span class="m">✓</span><span>Someone internal will hold the keys afterwards — you want documentation, not a retainer you can never leave.</span></li>
+      </ul>
+    </div>
+    <div class="fitcol no">
+      <span class="eyebrow">Not a fit</span>
+      <h3>This is not for you if</h3>
+      <ul>
+        <li><span class="m">✕</span><span>You want AI to replace your team. It will not, and we will not sell you that.</span></li>
+        <li><span class="m">✕</span><span>You want the cheapest option rather than the right one. A public subscription is cheaper on day one, and that is a legitimate choice.</span></li>
+        <li><span class="m">✕</span><span>Nobody internally owns IT. Something that runs inside your business needs someone inside your business who cares that it is running.</span></li>
+        <li><span class="m">✕</span><span>You need it live next week. Architecture done properly takes longer than that.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" style="padding-top:0">
+  <div class="shead"><h2>Still sceptical? Good.</h2><span class="eyebrow">Three honest answers</span></div>
+  <div class="cols">
+    <div class="col">
+      <span class="eyebrow">Objection 01</span>
+      <h3>"We tried AI and it made things up."</h3>
+      <p>So does an unconstrained model with no grounding. Ours answer from your documents and your databases, name the source, and state plainly when a question falls outside what they can see. The failure modes are designed and tested before anything reaches a user.</p>
+    </div>
+    <div class="col">
+      <span class="eyebrow">Objection 02</span>
+      <h3>"It will become another thing we depend on you for."</h3>
+      <p>Everything we build is handed over documented, down to the configuration files and the rollback path. If you replace us, the platform keeps running and your team has what they need to run it. That is a deliberate commercial position, not an accident.</p>
+    </div>
+    <div class="col">
+      <span class="eyebrow">Objection 03</span>
+      <h3>"Our data cannot leave the building."</h3>
+      <p>Then it does not. The models run on your hardware, on your network, behind your perimeter. This is the constraint we design for first, not a feature we bolt on afterwards for regulated clients.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="proof">
+    <span class="eyebrow">Reference engagement</span>
+    <blockquote style="margin-top:18px">A regulated Australian manufacturer, from zero AI capability to a governed platform serving staff and partner organisations.</blockquote>
+    <div class="stats">
+      <div class="stat"><div class="v">18</div><div class="l">Services governed</div></div>
+      <div class="stat"><div class="v">2</div><div class="l">Identity providers brokered</div></div>
+      <div class="stat"><div class="v">ML2</div><div class="l">Essential Eight target</div></div>
+      <div class="stat"><div class="v">0</div><div class="l">Prompts leaving site</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="wrap" style="padding-bottom:70px">
+  <div class="shead" style="margin-bottom:28px"><h2>Start with the architecture</h2><span class="eyebrow">No obligation</span></div>
+  <p class="lede" style="margin-top:0">Bring us a process you think an agent should own. We will tell you honestly whether it should, what it would take, and what it would cost to run.</p>
+  <div class="cta">
+    <a class="btn" href="mailto:request@intertg.com">Email request@intertg.com</a>
+    <a class="btn ghost" href="tel:1300305588">1300 305 588</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>INTERprise Technologies &nbsp;·&nbsp; Sydney, NSW, Australia</div>
+    <div class="mono">ai.intertg.com</div>
+  </div>
+</footer>
+
+</body>
+</html>
