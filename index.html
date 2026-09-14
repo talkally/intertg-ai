@@ -93,6 +93,7 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.4vw,36px);l
 .band .claim{font-family:var(--display);font-weight:600;font-size:clamp(34px,4.4vw,52px);line-height:1.02;letter-spacing:-.04em}
 .band .claim em{font-style:normal;color:var(--signal)}
 .band .sub{margin-top:26px;max-width:52ch;font-size:19px;color:var(--slate)}
+.band .sub strong{color:var(--ink);font-weight:500}
 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:52px;border-top:1px solid var(--rule)}
 .fact{padding:24px 26px 0;border-left:1px solid var(--rule)}
 .fact:first-child{border-left:0;padding-left:0}
@@ -273,7 +274,7 @@ footer .mono{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-t
       <div class="layer"><div class="lk">Identity</div><div class="lt">Directory federation &amp; brokered SSO<small>Active Directory and LDAP integration, partner tenants, conditional MFA</small></div><div class="lp">least privilege</div></div>
       <div class="layer"><div class="lk">Gateway</div><div class="lt">Model routing &amp; budget control<small>Scoped keys, per-application aliases, spend ceilings</small></div><div class="lp">cost ceiling</div></div>
       <div class="layer"><div class="lk">Reasoning</div><div class="lt">Agents, retrieval &amp; workflow<small>Vector store, orchestration, conversational surfaces</small></div><div class="lp">no data egress</div></div>
-      <div class="layer"><div class="lk">Evidence</div><div class="lt">Tracing, metrics &amp; security telemetry<small>Every prompt traced, every service watched, every event retained</small></div><div class="lp">full audit trail</div></div>
+      <div class="layer"><div class="lk">Evidence</div><div class="lt">Tracing, metrics &amp; security telemetry<small>Every prompt and every answer recorded and searchable, every service watched, every event retained</small></div><div class="lp">searchable record</div></div>
     </div>
     <p class="note">We deliver the whole stack, not a layer of it — and every layer reports on itself, so the platform can be proven to be working rather than assumed to be. We do not publish the bill of materials. Components are selected per client against their regulatory and network constraints, and disclosed under engagement; naming the internals of a client's platform on a public page is reconnaissance we are not willing to hand out.</p>
   </div>
@@ -282,13 +283,13 @@ footer .mono{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-t
 <section class="band">
   <div class="wrap">
     <div class="shead"><h2>The hardware question</h2><span class="eyebrow">Local models</span></div>
-    <p class="claim"><em>No GPU.</em></p>
-    <p class="sub">For everyday operational tasks, a locally hosted model does the work most people currently send to a public AI service — with the difference that nothing leaves your network.</p>
+    <p class="claim"><em>No GPU to start with.</em></p>
+    <p class="sub">For everyday automation work, our Private AI Platform uses a local model customised for processor-only inference, and <strong>64 GB of memory carries it</strong>. Your documents, your records and your prompts stay sovereign, because nothing leaves your network.</p>
     <div class="facts">
       <div class="fact">
         <div class="fk">Footprint</div>
-        <div class="fv">A server VM you already own</div>
-        <div class="fd">Ordinary CPU and memory on existing virtualisation. No accelerator purchase, no new rack, no data-centre conversation.</div>
+        <div class="fv">Memory, not accelerators</div>
+        <div class="fd">64 GB of memory and ordinary processors on your existing virtualisation. No accelerator purchase, no new rack, no data-centre conversation.</div>
       </div>
       <div class="fact">
         <div class="fk">Escalation</div>
@@ -298,7 +299,7 @@ footer .mono{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-t
       <div class="fact">
         <div class="fk">Routing</div>
         <div class="fv">Local by default, cloud by exception</div>
-        <div class="fd">Sensitive work stays on the local model. A task that genuinely needs a frontier model is routed deliberately, logged, and costed.</div>
+        <div class="fd">Sensitive work stays on the local model. A task that genuinely needs a frontier model is routed deliberately, logged, and costed. Whatever the route, the question and the answer are both recorded, and you can search them.</div>
       </div>
     </div>
   </div>
